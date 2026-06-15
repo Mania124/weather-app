@@ -1,0 +1,56 @@
+.main {
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+  margin: 0.5rem 0 0.25rem;
+  color: var(--text-h);
+}
+
+.subtitle {
+  margin: 0 0 1rem;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.location {
+  margin: 0.75rem 0;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.status {
+  color: var(--text);
+  font-style: italic;
+}
+
+.statusError {
+  color: #ef4444;
+}
+
+.cards {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 2rem;
+  }
+  .title {
+    font-size: 2.5rem;
+    margin: 1rem 0 0.5rem;
+  }
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+  }
+}

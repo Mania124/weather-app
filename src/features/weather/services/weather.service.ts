@@ -1,5 +1,5 @@
 import { get } from "@/shared/services/openMeteoClient";
-import { mapCurrentWeather } from "../mappers/current-wather.mappers";
+import { mapCurrentWeather } from "../mappers/current-weather.mapper";
 import type { CurrentWeather } from "../types/current-weather";
 import type { OpenMeteoCurrentResponse } from "../types/open-meteo";
 import { mapHourlyForecast } from "../mappers/hourly-forecast.mapper";
