@@ -24,8 +24,9 @@ This project serves as a portfolio-quality example of consuming external APIs an
 - Current weather conditions
 - Hourly weather forecasts
 - Daily weather forecasts
+- 7-day forecast (separate page)
+- Air quality summary
 - Historical weather lookup
-- Air quality monitoring
 - City search and geocoding
 - Favorite locations
 - Recent searches
@@ -100,13 +101,6 @@ Used for:
 - Min/Max temperatures
 - Weather summaries
 
-### Historical Weather
-
-Used to:
-
-- Search weather conditions for previous dates
-- Compare trends
-
 ### Air Quality
 
 Used to display:
@@ -114,7 +108,13 @@ Used to display:
 - PM2.5
 - PM10
 - Ozone
-- UV-related indicators
+
+### Historical Weather
+
+Used to:
+
+- Search weather conditions for previous dates
+- Compare trends
 
 ### Geocoding
 
@@ -157,35 +157,117 @@ This allows:
 ```text
 src/
 ├── app/
-│   ├── components/
-│   │   ├── weather/
-│   │   ├── forecast/
-│   │   ├── air-quality/
-│   │   └── common/
-│   │
-│   ├── pages/
-│   │   ├── Dashboard/
-│   │   ├── Historical/
-│   │   └── Search/
-│   │
-│   ├── features/
-│   │   ├── weather/
-│   │   ├── airQuality/
-│   │   ├── geocoding/
-│   │   └── history/
-│   │
-│   ├── services/
-│   │   ├── api/
-│   │   └── mappers/
-│   │
-│   ├── hooks/
-│   ├── routes/
-│   ├── types/
-│   ├── utils/
 │   ├── App.tsx
-│   └── App.css
+│   ├── App.module.css
+│   └── providers/
+│       └── query-provider.tsx
 │
-├── assets/
+├── features/
+│   ├── geocoding/
+│   │   ├── components/
+│   │   │   └── LocationSearch.tsx
+│   │   ├── context/
+│   │   │   ├── location-context.tsx
+│   │   │   └── location-provider.tsx
+│   │   ├── hooks/
+│   │   │   ├── use-location.ts
+│   │   │   └── use-location-search.ts
+│   │   ├── mappers/
+│   │   │   └── location.mapper.ts
+│   │   ├── services/
+│   │   │   └── geocoding.service.ts
+│   │   └── types/
+│   │       ├── location.ts
+│   │       └── open-meteo-geocoding.ts
+│   │
+│   ├── weather/
+│   │   ├── components/
+│   │   │   ├── CurrentWeatherCard.tsx
+│   │   │   ├── HourlyForecastCard.tsx
+│   │   │   └── DailyForecastCard.tsx
+│   │   ├── hooks/
+│   │   │   └── use-weather-overview.ts
+│   │   ├── mappers/
+│   │   │   ├── current-weather.mapper.ts
+│   │   │   ├── hourly-forecast.mapper.ts
+│   │   │   └── daily-forecast.mapper.ts
+│   │   ├── services/
+│   │   │   └── weather-overview.service.ts
+│   │   ├── types/
+│   │   │   ├── current-weather.ts
+│   │   │   ├── hourly-forecast.ts
+│   │   │   ├── daily-forecast.ts
+│   │   │   └── open-meteo.ts
+│   │   └── utils/
+│   │       └── weather-codes.ts
+│   │
+│   ├── air-quality/
+│   │   ├── components/
+│   │   │   └── AirQualityCard.tsx
+│   │   ├── hooks/
+│   │   │   └── use-air-quality.ts
+│   │   ├── mappers/
+│   │   │   └── air-quality.mapper.ts
+│   │   ├── services/
+│   │   │   └── air-quality.service.ts
+│   │   └── types/
+│   │       ├── air-quality.ts
+│   │       └── open-meteo-air-quality.ts
+│   │
+│   ├── history/
+│   │   ├── components/
+│   │   │   └── HistoricalWeatherCard.tsx
+│   │   ├── hooks/
+│   │   │   └── use-historical-weather.ts
+│   │   ├── mappers/
+│   │   │   └── historical-weather.mapper.ts
+│   │   ├── services/
+│   │   │   └── historical-weather.service.ts
+│   │   └── types/
+│   │       ├── historical-weather.ts
+│   │       └── open-meteo-historical.ts
+│   │
+│   ├── favourites/
+│   │   ├── hooks/
+│   │   │   └── use-favorites.ts
+│   │   ├── services/
+│   │   │   └── favorites.service.ts
+│   │   └── types/
+│   │       └── favorite-location.ts
+│   │
+│   └── theme/
+│       ├── components/
+│       │   ├── theme-toggle.tsx
+│       │   └── theme-toggle.module.css
+│       ├── context/
+│       │   ├── theme-context.ts
+│       │   └── theme-provider.tsx
+│       └── hooks/
+│           └── use-theme.ts
+│
+├── pages/
+│   ├── Dashboard/
+│   │   ├── DashboardPage.tsx
+│   │   └── DashboardPage.module.css
+│   ├── DailyForecast/
+│   │   ├── DailyForecastPage.tsx
+│   │   └── DailyForecastPage.module.css
+│   ├── Historical/
+│   │   ├── HistoricalPage.tsx
+│   │   └── HistoricalPage.module.css
+│   └── Search/
+│       └── ...
+│
+├── shared/
+│   ├── services/
+│   │   └── openMeteoClient.ts
+│   ├── hooks/
+│   │   └── useSelectedLocation.ts
+│   └── types/
+│
+├── routes/
+│   └── router.tsx
+│
 ├── index.css
 └── main.tsx
 ```
@@ -250,6 +332,11 @@ Displays:
 - 7-day forecast
 - Air quality summary
 
+### 7-Day Forecast
+
+- Extended outlook as a separate feature/page
+- Daily summary for 7 days ahead
+
 ### Search
 
 Search locations through geocoding.
@@ -259,7 +346,7 @@ Search locations through geocoding.
 Search weather conditions by:
 
 - Location
-- Date
+- Date range
 
 ### Favorites
 
@@ -276,7 +363,6 @@ Persist search history.
 ### Phase 2
 
 - Weather alerts
-- Dark mode
 - PWA support
 - Offline caching
 
@@ -329,6 +415,20 @@ The project is successful if it demonstrates:
 ```bash
 npm install
 npm run dev
+```
+
+---
+
+## Testing
+
+Unit and integration tests are included for mapper functions and key UI flows.
+
+```bash
+# Run tests once
+npm run test:run
+
+# Run tests in watch mode
+npm run test
 ```
 
 ---
