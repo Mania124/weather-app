@@ -34,13 +34,6 @@
   color: #ef4444;
 }
 
-.cards {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
 @media (min-width: 768px) {
   .main {
     padding: 2rem;
@@ -48,8 +41,5 @@
   .title {
     font-size: 2.5rem;
     margin: 1rem 0 0.5rem;
-  }
-  .cards {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
