@@ -24,8 +24,9 @@ This project serves as a portfolio-quality example of consuming external APIs an
 - Current weather conditions
 - Hourly weather forecasts
 - Daily weather forecasts
+- 7-day forecast (separate page)
+- Air quality summary
 - Historical weather lookup
-- Air quality monitoring
 - City search and geocoding
 - Favorite locations
 - Recent searches
@@ -100,13 +101,6 @@ Used for:
 - Min/Max temperatures
 - Weather summaries
 
-### Historical Weather
-
-Used to:
-
-- Search weather conditions for previous dates
-- Compare trends
-
 ### Air Quality
 
 Used to display:
@@ -115,6 +109,13 @@ Used to display:
 - PM10
 - Ozone
 - UV-related indicators
+
+### Historical Weather
+
+Used to:
+
+- Search weather conditions for previous dates
+- Compare trends
 
 ### Geocoding
 
@@ -165,14 +166,16 @@ src/
 │   │
 │   ├── pages/
 │   │   ├── Dashboard/
+│   │   ├── DailyForecast/
 │   │   ├── Historical/
 │   │   └── Search/
 │   │
 │   ├── features/
 │   │   ├── weather/
 │   │   ├── airQuality/
-│   │   ├── geocoding/
-│   │   └── history/
+│   │   ├── history/
+│   │   ├── favourites/
+│   │   └── geocoding/
 │   │
 │   ├── services/
 │   │   ├── api/
@@ -247,8 +250,12 @@ Displays:
 
 - Current weather
 - Hourly forecast
-- 7-day forecast
 - Air quality summary
+
+### 7-Day Forecast
+
+- Extended outlook as a separate feature/page
+- Daily summary for 7 days ahead
 
 ### Search
 
@@ -259,7 +266,7 @@ Search locations through geocoding.
 Search weather conditions by:
 
 - Location
-- Date
+- Date range
 
 ### Favorites
 
@@ -329,6 +336,20 @@ The project is successful if it demonstrates:
 ```bash
 npm install
 npm run dev
+```
+
+---
+
+## Testing
+
+Unit and integration tests are included for mapper functions and key UI flows.
+
+```bash
+# Run tests once
+npm run test:run
+
+# Run tests in watch mode
+npm run test
 ```
 
 ---

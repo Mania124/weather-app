@@ -1,7 +1,6 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter } from "react-router-dom";
 import { LocationProvider } from "@/features/geocoding/context/location-provider";
 import { ThemeProvider } from "@/features/theme/context/theme-provider";
 import { ThemeToggle } from "@/features/theme/components/theme-toggle";

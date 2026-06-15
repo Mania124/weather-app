@@ -30,6 +30,20 @@ vi.mock("@/features/weather/hooks/use-weather-overview", () => ({
           weatherCode: 0,
         },
       ],
+      daily: [
+        {
+          date: "2026-06-15",
+          minTemperature: 15,
+          maxTemperature: 28,
+          weatherCode: 3,
+        },
+        {
+          date: "2026-06-16",
+          minTemperature: 17,
+          maxTemperature: 30,
+          weatherCode: 0,
+        },
+      ],
     },
     isLoading: false,
     error: null,
