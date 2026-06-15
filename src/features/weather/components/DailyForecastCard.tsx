@@ -1,4 +1,5 @@
 import type { DailyForecast } from "@/features/weather/types/daily-forecast";
+import { getWeatherDescription } from "@/features/weather/utils/weather-codes";
 import styles from "./DailyForecastCard.module.css";
 
 interface Props {
@@ -16,7 +17,7 @@ export function DailyForecastCard({ forecast }: Props) {
             <span className={styles.temp}>
               {day.maxTemperature}° / {day.minTemperature}°
             </span>
-            <span className={styles.code}>Code {day.weatherCode}</span>
+            <span className={styles.code}>{getWeatherDescription(day.weatherCode)}</span>
           </div>
         ))}
       </div>

@@ -108,7 +108,6 @@ Used to display:
 - PM2.5
 - PM10
 - Ozone
-- UV-related indicators
 
 ### Historical Weather
 
@@ -158,37 +157,117 @@ This allows:
 ```text
 src/
 ├── app/
-│   ├── components/
-│   │   ├── weather/
-│   │   ├── forecast/
-│   │   ├── air-quality/
-│   │   └── common/
-│   │
-│   ├── pages/
-│   │   ├── Dashboard/
-│   │   ├── DailyForecast/
-│   │   ├── Historical/
-│   │   └── Search/
-│   │
-│   ├── features/
-│   │   ├── weather/
-│   │   ├── airQuality/
-│   │   ├── history/
-│   │   ├── favourites/
-│   │   └── geocoding/
-│   │
-│   ├── services/
-│   │   ├── api/
-│   │   └── mappers/
-│   │
-│   ├── hooks/
-│   ├── routes/
-│   ├── types/
-│   ├── utils/
 │   ├── App.tsx
-│   └── App.css
+│   ├── App.module.css
+│   └── providers/
+│       └── query-provider.tsx
 │
-├── assets/
+├── features/
+│   ├── geocoding/
+│   │   ├── components/
+│   │   │   └── LocationSearch.tsx
+│   │   ├── context/
+│   │   │   ├── location-context.tsx
+│   │   │   └── location-provider.tsx
+│   │   ├── hooks/
+│   │   │   ├── use-location.ts
+│   │   │   └── use-location-search.ts
+│   │   ├── mappers/
+│   │   │   └── location.mapper.ts
+│   │   ├── services/
+│   │   │   └── geocoding.service.ts
+│   │   └── types/
+│   │       ├── location.ts
+│   │       └── open-meteo-geocoding.ts
+│   │
+│   ├── weather/
+│   │   ├── components/
+│   │   │   ├── CurrentWeatherCard.tsx
+│   │   │   ├── HourlyForecastCard.tsx
+│   │   │   └── DailyForecastCard.tsx
+│   │   ├── hooks/
+│   │   │   └── use-weather-overview.ts
+│   │   ├── mappers/
+│   │   │   ├── current-weather.mapper.ts
+│   │   │   ├── hourly-forecast.mapper.ts
+│   │   │   └── daily-forecast.mapper.ts
+│   │   ├── services/
+│   │   │   └── weather-overview.service.ts
+│   │   ├── types/
+│   │   │   ├── current-weather.ts
+│   │   │   ├── hourly-forecast.ts
+│   │   │   ├── daily-forecast.ts
+│   │   │   └── open-meteo.ts
+│   │   └── utils/
+│   │       └── weather-codes.ts
+│   │
+│   ├── air-quality/
+│   │   ├── components/
+│   │   │   └── AirQualityCard.tsx
+│   │   ├── hooks/
+│   │   │   └── use-air-quality.ts
+│   │   ├── mappers/
+│   │   │   └── air-quality.mapper.ts
+│   │   ├── services/
+│   │   │   └── air-quality.service.ts
+│   │   └── types/
+│   │       ├── air-quality.ts
+│   │       └── open-meteo-air-quality.ts
+│   │
+│   ├── history/
+│   │   ├── components/
+│   │   │   └── HistoricalWeatherCard.tsx
+│   │   ├── hooks/
+│   │   │   └── use-historical-weather.ts
+│   │   ├── mappers/
+│   │   │   └── historical-weather.mapper.ts
+│   │   ├── services/
+│   │   │   └── historical-weather.service.ts
+│   │   └── types/
+│   │       ├── historical-weather.ts
+│   │       └── open-meteo-historical.ts
+│   │
+│   ├── favourites/
+│   │   ├── hooks/
+│   │   │   └── use-favorites.ts
+│   │   ├── services/
+│   │   │   └── favorites.service.ts
+│   │   └── types/
+│   │       └── favorite-location.ts
+│   │
+│   └── theme/
+│       ├── components/
+│       │   ├── theme-toggle.tsx
+│       │   └── theme-toggle.module.css
+│       ├── context/
+│       │   ├── theme-context.ts
+│       │   └── theme-provider.tsx
+│       └── hooks/
+│           └── use-theme.ts
+│
+├── pages/
+│   ├── Dashboard/
+│   │   ├── DashboardPage.tsx
+│   │   └── DashboardPage.module.css
+│   ├── DailyForecast/
+│   │   ├── DailyForecastPage.tsx
+│   │   └── DailyForecastPage.module.css
+│   ├── Historical/
+│   │   ├── HistoricalPage.tsx
+│   │   └── HistoricalPage.module.css
+│   └── Search/
+│       └── ...
+│
+├── shared/
+│   ├── services/
+│   │   └── openMeteoClient.ts
+│   ├── hooks/
+│   │   └── useSelectedLocation.ts
+│   └── types/
+│
+├── routes/
+│   └── router.tsx
+│
 ├── index.css
 └── main.tsx
 ```
@@ -250,6 +329,7 @@ Displays:
 
 - Current weather
 - Hourly forecast
+- 7-day forecast
 - Air quality summary
 
 ### 7-Day Forecast
@@ -283,7 +363,6 @@ Persist search history.
 ### Phase 2
 
 - Weather alerts
-- Dark mode
 - PWA support
 - Offline caching
 
