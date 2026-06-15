@@ -1,4 +1,3 @@
-import { get } from "@/shared/services/openMeteoClient";
 import { mapHistoricalWeather } from "../mappers/historical-weather.mapper";
 import type { HistoricalWeather } from "../types/historical-weather";
 import type { OpenMeteoHistoricalResponse } from "../types/open-meteo-historical";
