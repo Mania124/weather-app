@@ -1,5 +1,5 @@
+import { LocationSearch } from "@/features/geocoding/components/LocationSearch";
 import { useLocation } from "@/features/geocoding/hooks/use-location";
-
 import { CurrentWeatherCard } from "@/features/weather/components/CurrentWeatherCard";
 import { HourlyForecastCard } from "@/features/weather/components/HourlyForecastCard";
 
@@ -10,6 +10,7 @@ export function DashboardPage() {
     <main>
       <h1>Meteomania</h1>
       <p>Weather intelligence dashboard</p>
+      <LocationSearch />
       <p>
         {location.name}, {location.country}
       </p>
