@@ -7,3 +7,14 @@ export interface OpenMeteoCurrentResponse {
     weather_code: number;
   };
 }
+export interface OpenMeteoHourlyResponse {
+  hourly: {
+    time: string[];
+
+    temperature_2m: number[];
+
+    precipitation_probability: number[];
+
+    weather_code: number[];
+  };
+}

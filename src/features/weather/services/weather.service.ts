@@ -1,10 +1,10 @@
 import { get } from "@/shared/services/openMeteoClient";
-
 import { mapCurrentWeather } from "../mappers/current-wather.mappers";
-
 import type { CurrentWeather } from "../types/current-weather";
-
 import type { OpenMeteoCurrentResponse } from "../types/open-meteo";
+import { mapHourlyForecast } from "../mappers/hourly-forecast.mapper";
+import type { HourlyForecast } from "../types/hourly-forecast";
+import type { OpenMeteoHourlyResponse } from "../types/open-meteo";
 
 export async function getCurrentWeather(
   latitude: number,
@@ -15,4 +15,18 @@ export async function getCurrentWeather(
   );
 
   return mapCurrentWeather(response);
+}
+
+export async function getHourlyForecast(
+  latitude: number,
+  longitude: number
+): Promise<HourlyForecast[]> {
+  const response =
+    await get<OpenMeteoHourlyResponse>(
+      `/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation_probability,weather_code`
+    );
+
+  return mapHourlyForecast(
+    response
+  );
 }
