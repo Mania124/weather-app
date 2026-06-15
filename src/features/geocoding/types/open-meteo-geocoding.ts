@@ -1,5 +1,5 @@
 export interface OpenMeteoGeocodingResponse {
-  results: {
+  results?: {
     id: number;
 
     name: string;
@@ -11,5 +11,7 @@ export interface OpenMeteoGeocodingResponse {
     longitude: number;
 
     timezone: string;
+
+    admin1?: string;
   }[];
 }
