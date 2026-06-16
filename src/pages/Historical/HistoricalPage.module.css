@@ -19,6 +19,12 @@
   font-size: 0.95rem;
 }
 
+.location {
+  margin: 0.75rem 0;
+  color: var(--text);
+  font-weight: 500;
+}
+
 .controls {
   display: flex;
   gap: 1rem;
