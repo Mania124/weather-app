@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "@/features/geocoding/hooks/use-location";
 import { useHistoricalWeather } from "@/features/history/hooks/use-historical-weather";
 import { HistoricalWeatherCard } from "@/features/history/components/HistoricalWeatherCard";
+import { LocationSearch } from "@/features/geocoding/components/LocationSearch";
 import styles from "./HistoricalPage.module.css";
 
 export function HistoricalPage() {
@@ -20,6 +21,10 @@ export function HistoricalPage() {
       <h1 className={styles.title}>Historical Weather</h1>
       <p className={styles.subtitle}>
         Look up past weather for {location.name}, {location.country}
+      </p>
+      <LocationSearch />
+      <p className={styles.location}>
+        {location.name}, {location.country}
       </p>
 
       <div className={styles.controls}>
